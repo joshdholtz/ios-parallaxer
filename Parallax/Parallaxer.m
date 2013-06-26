@@ -130,6 +130,8 @@
             CGRect frame = view.frame;
             frame.origin.y = stopAt + scrollView.contentOffset.y;
             [view setFrame:frame];
+        } else {
+            [view setFrame:initialRect];
         }
     } forView:view];
 }
@@ -161,9 +163,9 @@
             alpha = 1.0f - percent;
             
         } else if (scrollView.contentOffset.y <= start) {
-            alpha = 1.0f;
-        } else if (scrollView.contentOffset.y >= end) {
             alpha = 0.0f;
+        } else if (scrollView.contentOffset.y >= end) {
+            alpha = 1.0f;
         }
         
         [view setAlpha:alpha];
