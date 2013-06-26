@@ -19,7 +19,7 @@
 		03CC99AD177A99520098DFAE /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03CC99AC177A99520098DFAE /* ViewController.m */; };
 		03CC99B0177A99520098DFAE /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03CC99AE177A99520098DFAE /* ViewController.xib */; };
 		03CC99B7177A99F60098DFAE /* ScrollContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03CC99B6177A99F60098DFAE /* ScrollContentView.xib */; };
-		03CC99BA177A9B610098DFAE /* Parallaxer.m in Sources */ = {isa = PBXBuildFile; fileRef = 03CC99B9177A9B610098DFAE /* Parallaxer.m */; };
+		03CC99BE177B28450098DFAE /* Parallaxer.m in Sources */ = {isa = PBXBuildFile; fileRef = 03CC99BD177B28450098DFAE /* Parallaxer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,8 +40,8 @@
 		03CC99AC177A99520098DFAE /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		03CC99AF177A99520098DFAE /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
 		03CC99B6177A99F60098DFAE /* ScrollContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScrollContentView.xib; sourceTree = "<group>"; };
-		03CC99B8177A9B610098DFAE /* Parallaxer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Parallaxer.h; sourceTree = "<group>"; };
-		03CC99B9177A9B610098DFAE /* Parallaxer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Parallaxer.m; sourceTree = "<group>"; };
+		03CC99BC177B28450098DFAE /* Parallaxer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Parallaxer.h; sourceTree = "<group>"; };
+		03CC99BD177B28450098DFAE /* Parallaxer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Parallaxer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +88,7 @@
 		03CC9999177A99510098DFAE /* Parallax */ = {
 			isa = PBXGroup;
 			children = (
+				03CC99BB177B281E0098DFAE /* Classes */,
 				03CC99A2177A99520098DFAE /* AppDelegate.h */,
 				03CC99A3177A99520098DFAE /* AppDelegate.m */,
 				03CC99AB177A99520098DFAE /* ViewController.h */,
@@ -95,8 +96,6 @@
 				03CC99AE177A99520098DFAE /* ViewController.xib */,
 				03CC999A177A99510098DFAE /* Supporting Files */,
 				03CC99B6177A99F60098DFAE /* ScrollContentView.xib */,
-				03CC99B8177A9B610098DFAE /* Parallaxer.h */,
-				03CC99B9177A9B610098DFAE /* Parallaxer.m */,
 			);
 			path = Parallax;
 			sourceTree = "<group>";
@@ -114,6 +113,15 @@
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
+		};
+		03CC99BB177B281E0098DFAE /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				03CC99BC177B28450098DFAE /* Parallaxer.h */,
+				03CC99BD177B28450098DFAE /* Parallaxer.m */,
+			);
+			path = Classes;
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -185,7 +193,7 @@
 				03CC99A0177A99520098DFAE /* main.m in Sources */,
 				03CC99A4177A99520098DFAE /* AppDelegate.m in Sources */,
 				03CC99AD177A99520098DFAE /* ViewController.m in Sources */,
-				03CC99BA177A9B610098DFAE /* Parallaxer.m in Sources */,
+				03CC99BE177B28450098DFAE /* Parallaxer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
