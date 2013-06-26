@@ -39,8 +39,14 @@
         [_parallaxer addParallaxFixed:_view2 stopAt:50 contentHeightOffset:50];
         [_parallaxer addParallaxFixed:_view3 stopAt:100 contentHeightOffset:150];
         [_parallaxer addParallaxFixed:_view4 stopAt:100 contentHeightOffset:350];
+        [_parallaxer addParallaxFixed:_view5 stopAt:50 contentHeightOffset:50];
         
-        [_parallaxer addParallaxOutLeft:_view3 start:200 end:350];
+        [_parallaxer addParallaxOutRight:_view3 start:200 end:350];
+        [_parallaxer addParallaxInRight:_view5 start:200 end:350];
+        
+        [_parallaxer addParallaxFadeOut:_view2 start:200 end:300];
+        
+        [_parallaxer scrollViewDidScroll:_scrollView];
     }
 }
 

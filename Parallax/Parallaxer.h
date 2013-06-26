@@ -13,8 +13,17 @@ typedef void (^ParallaxBlock)(UIScrollView* scrollView, UIView *view, CGRect ini
 @interface Parallaxer : NSObject
 
 - (void)addParallax:(ParallaxBlock)parallaxBlock forView:(UIView*)view;
+
 - (void)addParallaxOutLeft:(UIView*)view start:(float)start end:(float)end;
+- (void)addParallaxInLeft:(UIView*)view start:(float)start end:(float)end;
+
+- (void)addParallaxOutRight:(UIView*)view start:(float)start end:(float)end;
+- (void)addParallaxInRight:(UIView*)view start:(float)start end:(float)end;
+
 - (void)addParallaxFixed:(UIView*)view stopAt:(float)stopAt contentHeightOffset:(float)contentHeightOffset;
+
+- (void)addParallaxFadeOut:(UIView*)view start:(float)start end:(float)end;
+- (void)addParallaxFadeIn:(UIView*)view start:(float)start end:(float)end;
 
 - (void)scrollViewDidScroll:(UIScrollView*)scrollView;
 
