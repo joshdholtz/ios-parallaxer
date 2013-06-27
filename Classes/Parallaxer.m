@@ -53,6 +53,9 @@
     [_parallaxBlocks addObject:parallax];
 }
 
+// NOTE:
+// If scrolling vertically, this will not keep views fixed on the "set y" position. Use method addParallaxFixedY
+// If scrolling horizontally... hold on, we didn't get that far yet
 - (void)addParallaxRect:(UIView *)view startRect:(CGRect)startRect endRect:(CGRect)endRect start:(float)start end:(float)end {
     [self addParallax:^(UIScrollView *scrollView, UIView *view, CGRect initialRect) {
         CGRect frame = view.frame;
@@ -60,7 +63,13 @@
             float percent = 1.0f - ((end - scrollView.contentOffset.y) / (end - start));
             
             frame.origin.x = ((endRect.origin.x - initialRect.origin.x) * percent) + initialRect.origin.x;
-            NSLog(@"Percent - %f, %f %f %f", percent, frame.origin.x, endRect.origin.x, initialRect.origin.x);
+            frame.origin.y = ((endRect.origin.y - initialRect.origin.y) * percent) + initialRect.origin.y;
+            frame.size.width = ((endRect.size.width - initialRect.size.width) * percent) + initialRect.size.width;
+            frame.size.height = ((endRect.size.height - initialRect.size.height) * percent) + initialRect.size.height;
+            NSLog(@"X - %f, %f", percent, frame.origin.x);
+            NSLog(@"Y - %f, %f", percent, frame.origin.y);
+            NSLog(@"SIZE - %f, %f", percent, frame.size.width);
+            NSLog(@"WIDTH - %f, %f", percent, frame.size.height);
             
         } else if (scrollView.contentOffset.y <= start) {
             frame.origin.x = initialRect.origin.x;
@@ -96,7 +105,7 @@
     [self addParallaxRect:view startRect:frame endRect:view.frame start:start end:end];
 }
 
-- (void)addParallaxFixed:(UIView*)view stopAt:(float)stopAt contentHeightOffset:(float)contentHeightOffset {
+- (void)addParallaxFixedY:(UIView*)view stopAt:(float)stopAt contentHeightOffset:(float)contentHeightOffset {
     [self addParallax:^(UIScrollView *scrollView, UIView *view, CGRect initialRect) {;
         if (scrollView.contentOffset.y > contentHeightOffset) {
             CGRect frame = view.frame;

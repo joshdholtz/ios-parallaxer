@@ -23,7 +23,7 @@ typedef void (^ParallaxBlock)(UIScrollView* scrollView, UIView *view, CGRect ini
 - (void)addParallaxOutRight:(UIView*)view start:(float)start end:(float)end;
 - (void)addParallaxInRight:(UIView*)view start:(float)start end:(float)end;
 
-- (void)addParallaxFixed:(UIView*)view stopAt:(float)stopAt contentHeightOffset:(float)contentHeightOffset;
+- (void)addParallaxFixedY:(UIView*)view stopAt:(float)stopAt contentHeightOffset:(float)contentHeightOffset;
 
 - (void)addParallaxFadeOut:(UIView*)view start:(float)start end:(float)end;
 - (void)addParallaxFadeIn:(UIView*)view start:(float)start end:(float)end;

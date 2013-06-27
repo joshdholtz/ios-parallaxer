@@ -35,12 +35,12 @@
     if (_parallaxer == nil) {
         _parallaxer = [[Parallaxer alloc] init];
         
-        [_parallaxer addParallaxFixed:_view1 stopAt:0 contentHeightOffset:0];
-        [_parallaxer addParallaxFixed:_view2 stopAt:50 contentHeightOffset:50];
-        [_parallaxer addParallaxFixed:_view3 stopAt:100 contentHeightOffset:150];
-        [_parallaxer addParallaxFixed:_view4 stopAt:100 contentHeightOffset:350];
-        [_parallaxer addParallaxFixed:_view5 stopAt:50 contentHeightOffset:0];
-        [_parallaxer addParallaxFixed:_view6 stopAt:50 contentHeightOffset:0];
+        [_parallaxer addParallaxFixedY:_view1 stopAt:0 contentHeightOffset:0];
+        [_parallaxer addParallaxFixedY:_view2 stopAt:50 contentHeightOffset:50];
+        [_parallaxer addParallaxFixedY:_view3 stopAt:100 contentHeightOffset:150];
+        [_parallaxer addParallaxFixedY:_view4 stopAt:100 contentHeightOffset:350];
+        [_parallaxer addParallaxFixedY:_view5 stopAt:50 contentHeightOffset:0];
+        [_parallaxer addParallaxFixedY:_view6 stopAt:50 contentHeightOffset:0];
         
         [_parallaxer addParallaxOutLeft:_view3 start:200 end:350];
         [_parallaxer addParallaxInRight:_view5 start:200 end:350];
