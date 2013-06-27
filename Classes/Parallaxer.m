@@ -13,6 +13,8 @@
 @interface Parallax : NSObject
 
 @property (nonatomic, strong) UIView* view;
+@property (nonatomic, assign) CGRect initialRect;
+@property (nonatomic, assign) CGRect endRect;
 @property (nonatomic, copy) ParallaxBlock block;
 
 @end
@@ -23,7 +25,6 @@
 
 @interface Parallaxer()
 
-@property (nonatomic, strong) NSMutableDictionary *initialFrames;
 @property (nonatomic, strong) NSMutableArray *parallaxBlocks;
 
 @end
@@ -33,95 +34,66 @@
 - (id)init {
     self = [super init];
     if (self) {
-        _initialFrames = [NSMutableDictionary dictionary];
         _parallaxBlocks = [NSMutableArray array];
     }
     return self;
 }
 
 - (void)addParallax:(ParallaxBlock)parallaxBlock forView:(UIView*)view {
-    [_initialFrames setObject:[NSValue valueWithCGRect:view.frame] forKey:[NSValue valueWithNonretainedObject:view]];
+    [self addParallax:parallaxBlock forView:view startRect:view.frame endRect:CGRectZero];
+}
+
+- (void)addParallax:(ParallaxBlock)parallaxBlock forView:(UIView*)view startRect:(CGRect)startRect endRect:(CGRect)endRect {
     
     Parallax *parallax = [[Parallax alloc] init];
     [parallax setBlock:parallaxBlock];
+    [parallax setInitialRect:startRect];
+    [parallax setEndRect:endRect];
     [parallax setView:view];
     [_parallaxBlocks addObject:parallax];
 }
 
-- (void)addParallaxOutLeft:(UIView*)view start:(float)start end:(float)end {
+- (void)addParallaxRect:(UIView *)view startRect:(CGRect)startRect endRect:(CGRect)endRect start:(float)start end:(float)end {
     [self addParallax:^(UIScrollView *scrollView, UIView *view, CGRect initialRect) {
         CGRect frame = view.frame;
         if (scrollView.contentOffset.y > start && scrollView.contentOffset.y < end) {
-            float percent = ((end - scrollView.contentOffset.y) / (end - start));
+            float percent = 1.0f - ((end - scrollView.contentOffset.y) / (end - start));
             
-            frame.origin.x = ((initialRect.origin.x + view.superview.frame.size.width) * percent) - view.superview.frame.size.width;
+            frame.origin.x = ((endRect.origin.x - initialRect.origin.x) * percent) + initialRect.origin.x;
+            NSLog(@"Percent - %f, %f %f %f", percent, frame.origin.x, endRect.origin.x, initialRect.origin.x);
             
         } else if (scrollView.contentOffset.y <= start) {
             frame.origin.x = initialRect.origin.x;
         } else if (scrollView.contentOffset.y >= end) {
-            frame.origin.x = -view.superview.frame.size.width;
+            frame.origin.x = endRect.origin.x;
         }
         
         [view setFrame:frame];
-    } forView:view];
+    } forView:view startRect:startRect endRect:endRect];
+}
+
+- (void)addParallaxOutLeft:(UIView*)view start:(float)start end:(float)end {
+    CGRect frame = view.frame;
+    frame.origin.x = -view.superview.frame.size.width;
+    [self addParallaxRect:view startRect:view.frame endRect:frame start:start end:end];
 }
 
 - (void)addParallaxInLeft:(UIView*)view start:(float)start end:(float)end {
-    [self addParallax:^(UIScrollView *scrollView, UIView *view, CGRect initialRect) {
-        CGRect frame = view.frame;
-        if (scrollView.contentOffset.y > start && scrollView.contentOffset.y < end) {
-            float percent = 1.0f - ((end - scrollView.contentOffset.y) / (end - start));
-            
-            frame.origin.x = ((initialRect.origin.x + view.superview.frame.size.width) * percent) - view.superview.frame.size.width;
-            
-        } else if (scrollView.contentOffset.y <= start) {
-            frame.origin.x = -view.superview.frame.size.width;
-        } else if (scrollView.contentOffset.y >= end) {
-            frame.origin.x = initialRect.origin.x;
-        }
-        
-        [view setFrame:frame];
-    } forView:view];
+    CGRect frame = view.frame;
+    frame.origin.x = -view.superview.frame.size.width;
+    [self addParallaxRect:view startRect:frame endRect:view.frame start:start end:end];
 }
 
 - (void)addParallaxOutRight:(UIView*)view start:(float)start end:(float)end {
-    [self addParallax:^(UIScrollView *scrollView, UIView *view, CGRect initialRect) {
-        CGRect frame = view.frame;
-        if (scrollView.contentOffset.y > start && scrollView.contentOffset.y < end) {
-            float percent = 1.0f - ((end - scrollView.contentOffset.y) / (end - start));
-            
-            frame.origin.x = ((initialRect.origin.x + view.superview.frame.size.width) * percent);
-            
-            NSLog(@"Percent - %f, %f", percent, frame.origin.x);
-            
-        } else if (scrollView.contentOffset.y <= start) {
-            frame.origin.x = initialRect.origin.x;
-        } else if (scrollView.contentOffset.y >= end) {
-            frame.origin.x = view.superview.frame.size.width;
-        }
-        
-        [view setFrame:frame];
-    } forView:view];
+    CGRect frame = view.frame;
+    frame.origin.x = view.superview.frame.size.width;
+    [self addParallaxRect:view startRect:view.frame endRect:frame start:start end:end];
 }
 
 - (void)addParallaxInRight:(UIView*)view start:(float)start end:(float)end {
-    [self addParallax:^(UIScrollView *scrollView, UIView *view, CGRect initialRect) {
-        CGRect frame = view.frame;
-        if (scrollView.contentOffset.y > start && scrollView.contentOffset.y < end) {
-            float percent = ((end - scrollView.contentOffset.y) / (end - start));
-            
-            frame.origin.x = ((initialRect.origin.x + view.superview.frame.size.width) * percent) + initialRect.origin.x;
-            
-            NSLog(@"Percent - %f, %f", percent, frame.origin.x);
-            
-        } else if (scrollView.contentOffset.y <= start) {
-            frame.origin.x = view.superview.frame.size.width;
-        } else if (scrollView.contentOffset.y >= end) {
-            frame.origin.x = initialRect.origin.x;
-        }
-        
-        [view setFrame:frame];
-    } forView:view];
+    CGRect frame = view.frame;
+    frame.origin.x = view.superview.frame.size.width;
+    [self addParallaxRect:view startRect:frame endRect:view.frame start:start end:end];
 }
 
 - (void)addParallaxFixed:(UIView*)view stopAt:(float)stopAt contentHeightOffset:(float)contentHeightOffset {
@@ -177,7 +149,7 @@
     for (Parallax *parallax in _parallaxBlocks) {
         ParallaxBlock block = parallax.block;
         UIView *view = parallax.view;
-        CGRect initialFrame = [[_initialFrames objectForKey:[NSValue valueWithNonretainedObject:view]] CGRectValue];
+        CGRect initialFrame = parallax.initialRect;
         
         block(scrollView, view, initialFrame);
     }

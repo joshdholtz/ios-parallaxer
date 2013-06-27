@@ -42,7 +42,7 @@
         [_parallaxer addParallaxFixed:_view5 stopAt:50 contentHeightOffset:0];
         [_parallaxer addParallaxFixed:_view6 stopAt:50 contentHeightOffset:0];
         
-        [_parallaxer addParallaxOutRight:_view3 start:200 end:350];
+        [_parallaxer addParallaxOutLeft:_view3 start:200 end:350];
         [_parallaxer addParallaxInRight:_view5 start:200 end:350];
         
         [_parallaxer addParallaxFadeOut:_view2 start:200 end:300];
